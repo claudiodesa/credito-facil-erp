@@ -1,0 +1,16 @@
+[History]
+B0=CreditoFacil/frm_processoBaixa/Form_Activate
+B1=CreditoFacil/frm_relatorioCobranca/cmdGerar_Click
+B2=CreditoFacil/frm_processoGerarFinanciamento/MoveObjParaImpressao
+B3=CreditoFacil/frm_processoGerarFinanciamento/Click_Imprimir
+B4=CreditoFacil/clsFUNCIONARIO/consulta
+B5=CreditoFacil/clsFinanciamentoParcela/recuperaParcelasClienteEmpresa
+B6=CreditoFacil/clsFinanciamentoParcela/consultaCobranca
+B7=CreditoFacil/clsFinanciamento/consultaDetalhada
+B8=CreditoFacil/frm_processoGerarFinanciamento/PopulaRotas
+B9=CreditoFacil/frm_processoGerarFinanciamento/Limpacampos
+B10=CreditoFacil/MDICreditoFacil/menuOpt_Baixa_Click
+B11=CreditoFacil/frm_processoBaixa/vasCobranca_ButtonClicked
+B12=CreditoFacil/clsFinanciamentoParcela/pagarParcela
+B13=CreditoFacil/frm_processoBaixa/cboEmpresasDevedores_Click
+B14=CreditoFacil/frm_relatorioCobranca/PopulaRotas

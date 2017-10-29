@@ -1,0 +1,296 @@
+[Root]
+Most Recent Package=Crédito Fácil 1.0 - Instalação
+
+
+[Package|Standard Setup Package 1|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=H:\FonteDesenvolvimento\CreditoFacil\Setup
+
+[Package|Standard Setup Package 1|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Standard Setup Package 1|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Standard Setup Package 1|Files Found]
+
+[Package|Standard Setup Package 1|Files Released]
+
+[Package|Standard Setup Package 1|Missing Dependency Information]
+H:\Windows\System32\Calendario.ocx=
+H:\Windows\System32\MSSTDFMT.DLL=
+H:\Program Files\Common Files\System\ado\msado28.tlb=
+
+[Package|Standard Setup Package 1|Out-of-Date Dependency Information]
+H:\Windows\System32\MSCOMCT2.OCX=
+H:\Windows\System32\MSCOMCTL.OCX=
+
+[Package|Standard Setup Package 1|Files Added]
+
+[Package|Standard Setup Package 1|Files Removed]
+
+[Package|Standard Setup Package 1|Files In Project]
+H:\Users\AQUAT888\Desktop\CreditoFacil.exe=Yes
+H:\Windows\System32\msvbvm60.dll=Yes
+H:\Windows\System32\oleaut32.dll=Yes
+H:\Windows\System32\olepro32.dll=Yes
+H:\Windows\System32\asycfilt.dll=Yes
+H:\Windows\System32\stdole2.tlb=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+H:\Program Files\Common Files\System\ado\msado28.tlb=Yes
+H:\Windows\System32\Regobj.dll=Yes
+H:\Windows\System32\MSBIND.DLL=Yes
+H:\Windows\System32\MSSTDFMT.DLL=Yes
+H:\Program Files\Seagate Software\Viewers\ActiveXViewer\crviewer.dll=Yes
+H:\Program Files\Seagate Software\Crystal Reports\craxdrt.dll=Yes
+H:\Windows\System32\implode.dll=Yes
+H:\Windows\System32\crpaig32.dll=Yes
+\program files\seagate software\sschart\SSCSDK32.DLL=Yes
+H:\Windows\System32\p2smon.dll=Yes
+H:\Windows\System32\MSCOMCTL.OCX=Yes
+H:\Windows\System32\MSADODC.OCX=Yes
+H:\Windows\System32\MSDATLST.OCX=Yes
+H:\Windows\System32\Calendario.ocx=Yes
+H:\Program Files\Spread30\BIN\SPR32X30.ocx=Yes
+H:\Windows\System32\mfc42.dll=Yes
+H:\Windows\System32\msvcrt.dll=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT40.DLL=Yes
+H:\Windows\System32\COMDLG32.OCX=Yes
+H:\Windows\System32\TABCTL32.OCX=Yes
+H:\Windows\System32\THREED32.OCX=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MFC40.DLL=Yes
+H:\Windows\System32\MSCOMCT2.OCX=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+H:\Windows\System32\VB6STKIT.DLL=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+
+[Package|Standard Setup Package 1|Configure Registry Files]
+Applicable=No
+
+[Package|Standard Setup Package 1|Configure Remote Servers]
+Applicable=No
+
+[Package|Standard Setup Package 1|Install Locations]
+H:\Users\AQUAT888\Desktop\CreditoFacil.exe=$(AppPath)
+H:\Windows\System32\msvbvm60.dll=$(WinSysPathSysFile)
+H:\Windows\System32\oleaut32.dll=$(WinSysPathSysFile)
+H:\Windows\System32\olepro32.dll=$(WinSysPathSysFile)
+H:\Windows\System32\asycfilt.dll=$(WinSysPathSysFile)
+H:\Windows\System32\stdole2.tlb=$(WinSysPathSysFile)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+H:\Program Files\Common Files\System\ado\msado28.tlb=$(WinSysPath)
+H:\Windows\System32\Regobj.dll=$(AppPath)
+H:\Windows\System32\MSBIND.DLL=$(WinSysPath)
+H:\Windows\System32\MSSTDFMT.DLL=$(WinSysPath)
+H:\Program Files\Seagate Software\Viewers\ActiveXViewer\crviewer.dll=$(WinSysPath)
+H:\Program Files\Seagate Software\Crystal Reports\craxdrt.dll=$(WinSysPath)
+H:\Windows\System32\implode.dll=$(AppPath)
+H:\Windows\System32\crpaig32.dll=$(WinSysPath)
+\program files\seagate software\sschart\SSCSDK32.DLL=$(WinSysPath)
+H:\Windows\System32\p2smon.dll=$(WinSysPath)
+H:\Windows\System32\MSCOMCTL.OCX=$(WinSysPath)
+H:\Windows\System32\MSADODC.OCX=$(WinSysPath)
+H:\Windows\System32\MSDATLST.OCX=$(WinSysPath)
+H:\Windows\System32\Calendario.ocx=$(WinSysPath)
+H:\Program Files\Spread30\BIN\SPR32X30.ocx=$(WinSysPath)
+H:\Windows\System32\mfc42.dll=$(WinSysPathSysFile)
+H:\Windows\System32\msvcrt.dll=$(WinSysPathSysFile)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT40.DLL=$(WinSysPathSysFile)
+H:\Windows\System32\COMDLG32.OCX=$(WinSysPath)
+H:\Windows\System32\TABCTL32.OCX=$(WinSysPath)
+H:\Windows\System32\THREED32.OCX=$(WinSysPath)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MFC40.DLL=$(WinSysPathSysFile)
+H:\Windows\System32\MSCOMCT2.OCX=$(WinSysPath)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+H:\Windows\System32\VB6STKIT.DLL=$(WinSysPathSysFile)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+
+[Package|Standard Setup Package 1|Configure Shared Files]
+Applicable=Yes
+H:\Users\AQUAT888\Desktop\CreditoFacil.exe=Yes
+H:\Windows\System32\Regobj.dll=Yes
+H:\Windows\System32\implode.dll=Yes
+
+[Package|Standard Setup Package 1|Distribution]
+Type=single
+Size=
+Title=CreditoFacil
+
+[Package|Standard Setup Package 1|IconGroups]
+Group0=CreditoFacil
+PrivateGroup0=True
+Parent0=$(Programs)
+
+[Package|Standard Setup Package 1|CreditoFacil]
+Icon1=CreditoFacil.exe
+Title1=CreditoFacil
+StartIn1=$(AppPath)
+Key1=Icon1
+
+[Package|Standard Setup Package 1|Package]
+PackageFolder=H:\FonteDesenvolvimento\CreditoFacil\Setup
+ProjectFolder=H:\FonteDesenvolvimento\CreditoFacil\Principal
+ServerSideCab=
+File1=H:\FonteDesenvolvimento\CreditoFacil\Setup\setup.exe
+File2=H:\FonteDesenvolvimento\CreditoFacil\Setup\Setup.Lst
+File3=H:\FonteDesenvolvimento\CreditoFacil\Setup\CreditoFacil.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
+
+[Package|Crédito Fácil 1.0 - Instalação|CreditoFacil]
+Icon1=CreditoFacil.exe
+Title1=CreditoFacil
+StartIn1=$(AppPath)
+Key1=Icon1
+
+
+[Package|Crédito Fácil 1.0 - Instalação|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=H:\FonteDesenvolvimento\CreditoFacil\Setup
+
+[Package|Crédito Fácil 1.0 - Instalação|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Crédito Fácil 1.0 - Instalação|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Crédito Fácil 1.0 - Instalação|Files Found]
+
+[Package|Crédito Fácil 1.0 - Instalação|Files Released]
+
+[Package|Crédito Fácil 1.0 - Instalação|Missing Dependency Information]
+H:\Windows\System32\Calendario.ocx=
+H:\Windows\System32\MSSTDFMT.DLL=
+H:\Program Files\Common Files\System\ado\msado28.tlb=
+H:\Windows\System32\UCNumero.ocx=
+
+[Package|Crédito Fácil 1.0 - Instalação|Out-of-Date Dependency Information]
+H:\Windows\System32\MSCOMCT2.OCX=
+H:\Windows\System32\MSCOMCTL.OCX=
+
+[Package|Crédito Fácil 1.0 - Instalação|Files Added]
+
+[Package|Crédito Fácil 1.0 - Instalação|Files Removed]
+
+[Package|Crédito Fácil 1.0 - Instalação|Files In Project]
+H:\Windows\System32\msvbvm60.dll=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=Yes
+H:\Program Files\Common Files\System\ado\msado28.tlb=Yes
+H:\Windows\System32\Regobj.dll=Yes
+H:\Windows\System32\MSBIND.DLL=Yes
+H:\Windows\System32\MSSTDFMT.DLL=Yes
+H:\Program Files\Seagate Software\Viewers\ActiveXViewer\crviewer.dll=Yes
+H:\Program Files\Seagate Software\Crystal Reports\craxdrt.dll=Yes
+H:\Windows\System32\implode.dll=Yes
+H:\Windows\System32\crpaig32.dll=Yes
+\program files\seagate software\sschart\SSCSDK32.DLL=Yes
+H:\Windows\System32\p2smon.dll=Yes
+H:\Windows\System32\MSCOMCTL.OCX=Yes
+H:\Windows\System32\MSADODC.OCX=Yes
+H:\Windows\System32\MSDATLST.OCX=Yes
+H:\Windows\System32\Calendario.ocx=Yes
+H:\Program Files\Spread30\BIN\SPR32X30.ocx=Yes
+H:\Windows\System32\mfc42.dll=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT40.DLL=Yes
+H:\Windows\System32\COMDLG32.OCX=Yes
+H:\Windows\System32\TABCTL32.OCX=Yes
+H:\Windows\System32\THREED32.OCX=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MFC40.DLL=Yes
+H:\Windows\System32\MSCOMCT2.OCX=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+H:\Windows\System32\VB6STKIT.DLL=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=Yes
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT.DLL=Yes
+H:\FonteDesenvolvimento\CreditoFacil\Exe\CreditoFacil.exe=Yes
+H:\Windows\System32\UCNumero.ocx=Yes
+
+[Package|Crédito Fácil 1.0 - Instalação|Configure Registry Files]
+Applicable=No
+
+[Package|Crédito Fácil 1.0 - Instalação|Configure Remote Servers]
+Applicable=No
+
+[Package|Crédito Fácil 1.0 - Instalação|Install Locations]
+H:\Users\AQUAT888\Desktop\CreditoFacil.exe=$(AppPath)
+H:\Windows\System32\msvbvm60.dll=$(WinSysPathSysFile)
+H:\Windows\System32\oleaut32.dll=$(WinSysPathSysFile)
+H:\Windows\System32\olepro32.dll=$(WinSysPathSysFile)
+H:\Windows\System32\asycfilt.dll=$(WinSysPathSysFile)
+H:\Windows\System32\stdole2.tlb=$(WinSysPathSysFile)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+H:\Program Files\Common Files\System\ado\msado28.tlb=$(WinSysPath)
+H:\Windows\System32\Regobj.dll=$(AppPath)
+H:\Windows\System32\MSBIND.DLL=$(WinSysPath)
+H:\Windows\System32\MSSTDFMT.DLL=$(WinSysPath)
+H:\Program Files\Seagate Software\Viewers\ActiveXViewer\crviewer.dll=$(WinSysPath)
+H:\Program Files\Seagate Software\Crystal Reports\craxdrt.dll=$(WinSysPath)
+H:\Windows\System32\implode.dll=$(AppPath)
+H:\Windows\System32\crpaig32.dll=$(WinSysPath)
+\program files\seagate software\sschart\SSCSDK32.DLL=$(WinSysPath)
+H:\Windows\System32\p2smon.dll=$(WinSysPath)
+H:\Windows\System32\MSCOMCTL.OCX=$(WinSysPath)
+H:\Windows\System32\MSADODC.OCX=$(WinSysPath)
+H:\Windows\System32\MSDATLST.OCX=$(WinSysPath)
+H:\Windows\System32\Calendario.ocx=$(WinSysPath)
+H:\Program Files\Spread30\BIN\SPR32X30.ocx=$(WinSysPath)
+H:\Windows\System32\mfc42.dll=$(WinSysPathSysFile)
+H:\Windows\System32\msvcrt.dll=$(WinSysPathSysFile)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT40.DLL=$(WinSysPathSysFile)
+H:\Windows\System32\COMDLG32.OCX=$(WinSysPath)
+H:\Windows\System32\TABCTL32.OCX=$(WinSysPath)
+H:\Windows\System32\THREED32.OCX=$(WinSysPath)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MFC40.DLL=$(WinSysPathSysFile)
+H:\Windows\System32\MSCOMCT2.OCX=$(WinSysPath)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+H:\Windows\System32\VB6STKIT.DLL=$(WinSysPathSysFile)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=$(WinSysPathSysFile)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=$(WinSysPathSysFile)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=$(WinSysPathSysFile)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=$(WinSysPathSysFile)
+H:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT.DLL=$(WinSysPathSysFile)
+H:\FonteDesenvolvimento\CreditoFacil\Exe\CreditoFacil.exe=$(AppPath)
+H:\Windows\System32\UCNumero.ocx=$(WinSysPath)
+
+[Package|Crédito Fácil 1.0 - Instalação|Configure Shared Files]
+Applicable=Yes
+H:\Users\AQUAT888\Desktop\CreditoFacil.exe=Yes
+H:\Windows\System32\Regobj.dll=Yes
+H:\Windows\System32\implode.dll=Yes
+H:\FonteDesenvolvimento\CreditoFacil\Exe\CreditoFacil.exe=Yes
+
+[Package|Crédito Fácil 1.0 - Instalação|Distribution]
+Type=single
+Size=
+Title=Credito Fácil - ERP
+
+[Package|Crédito Fácil 1.0 - Instalação|IconGroups]
+Group0=Credito Fácil - ERP
+PrivateGroup0=-1
+Parent0=$(Programs)
+
+[Package|Crédito Fácil 1.0 - Instalação|Credito Fácil - ERP]
+Icon1=CreditoFacil.exe
+Title1=CreditoFacil
+StartIn1=$(AppPath)
+Key1=Icon1
+
+[Package|Crédito Fácil 1.0 - Instalação|Package]
+PackageFolder=H:\FonteDesenvolvimento\CreditoFacil\Setup
+ProjectFolder=H:\FonteDesenvolvimento\CreditoFacil\Principal
+ServerSideCab=
+File1=H:\FonteDesenvolvimento\CreditoFacil\Setup\setup.exe
+File2=H:\FonteDesenvolvimento\CreditoFacil\Setup\Setup.Lst
+File3=H:\FonteDesenvolvimento\CreditoFacil\Setup\CreditoFacil.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz

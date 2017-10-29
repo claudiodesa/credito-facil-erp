@@ -1,0 +1,11 @@
+Sql2008 instalado
+
+Dados:
+C:\Arquivos de Programas\CreditoFacil\dados
+
+Nome do Banco de Dados: credito_facil
+usuario sa: 288744cla
+
+chave de registro:
+"CreditoFacil" 
+"ConexaoCreditoFacil"="string de conexao"
