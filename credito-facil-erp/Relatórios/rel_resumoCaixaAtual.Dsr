@@ -1,9 +1,9 @@
 VERSION 5.00
 Begin {BD4B4E61-F7B8-11D0-964D-00A0C9273C2A} rel_resumoCaixaAtual 
-   ClientHeight    =   10620
+   ClientHeight    =   10785
    ClientLeft      =   0
-   ClientTop       =   390
-   ClientWidth     =   20400
+   ClientTop       =   285
+   ClientWidth     =   20460
    OleObjectBlob   =   "rel_resumoCaixaAtual.dsx":0000
 End
 Attribute VB_Name = "rel_resumoCaixaAtual"

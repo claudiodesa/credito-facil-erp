@@ -473,7 +473,8 @@ Dim mRs       As ADODB.Recordset
     ssql = ssql & " convert(varchar(2),financiamentoParcela.NUM_PARCELA)" & vbCrLf
     ssql = ssql & "  + '/' +" & vbCrLf
     ssql = ssql & " convert(varchar(2),financiamento.QTD_PARCELAS) as PARCELAS_PAGAS," & vbCrLf
-    ssql = ssql & " SUM(financiamentoParcela.VALOR_COBRADO) AS VALOR_DEVIDO," & vbCrLf
+    'ssql = ssql & " SUM(financiamentoParcela.VALOR_COBRADO) AS VALOR_DEVIDO," & vbCrLf
+    ssql = ssql & " SUM(CASE WHEN financiamentoParcela.VALOR_COBRADO < 0 THEN 0 ELSE financiamentoParcela.VALOR_COBRADO END) AS VALOR_DEVIDO," & vbCrLf
     ssql = ssql & " '' as RECEBIDO," & vbCrLf
     ssql = ssql & " '' as DATA," & vbCrLf
     ssql = ssql & " CONVERT(VARCHAR(10),financiamento.DATA_PRIMEIRA_PARCELA,103)," & vbCrLf

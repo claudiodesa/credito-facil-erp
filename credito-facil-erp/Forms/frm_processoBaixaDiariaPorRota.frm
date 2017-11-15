@@ -5,8 +5,8 @@ Begin VB.Form frm_processoBaixaDiariaPorRota
    BackColor       =   &H00FFFFFF&
    Caption         =   "Processo de baixa em parcelas de financiamentos - Por Agente"
    ClientHeight    =   8985
-   ClientLeft      =   2340
-   ClientTop       =   825
+   ClientLeft      =   2475
+   ClientTop       =   1455
    ClientWidth     =   14490
    ForeColor       =   &H00FFFFFF&
    Icon            =   "frm_processoBaixaDiariaPorRota.frx":0000
@@ -14,7 +14,15 @@ Begin VB.Form frm_processoBaixaDiariaPorRota
    LockControls    =   -1  'True
    ScaleHeight     =   8985
    ScaleWidth      =   14490
-   StartUpPosition =   2  'CenterScreen
+   Begin VB.CheckBox chkConfirmarTodosValoresInformados 
+      BackColor       =   &H00FFFFFF&
+      Caption         =   "Confirmar todos os valores informados"
+      Height          =   195
+      Left            =   300
+      TabIndex        =   16
+      Top             =   7980
+      Width           =   2985
+   End
    Begin VB.CommandButton Command1 
       BackColor       =   &H80000009&
       Caption         =   "Lançar Pagamentos"
@@ -54,14 +62,14 @@ Begin VB.Form frm_processoBaixaDiariaPorRota
       Width           =   1905
    End
    Begin FPSpread.vaSpread vasCobranca 
-      Height          =   7635
+      Height          =   6645
       Left            =   300
       TabIndex        =   4
       Top             =   930
       Width           =   13935
       _Version        =   196608
       _ExtentX        =   24580
-      _ExtentY        =   13467
+      _ExtentY        =   11721
       _StockProps     =   64
       DisplayRowHeaders=   0   'False
       EditEnterAction =   2
@@ -75,7 +83,7 @@ Begin VB.Form frm_processoBaixaDiariaPorRota
          Strikethrough   =   0   'False
       EndProperty
       GrayAreaBackColor=   12648447
-      MaxCols         =   13
+      MaxCols         =   14
       MaxRows         =   25
       ScrollBars      =   2
       SpreadDesigner  =   "frm_processoBaixaDiariaPorRota.frx":058A
@@ -156,7 +164,7 @@ Begin VB.Form frm_processoBaixaDiariaPorRota
          _ExtentX        =   2778
          _ExtentY        =   609
          _Version        =   393216
-         Format          =   17563649
+         Format          =   79495169
          CurrentDate     =   40758
       End
    End
@@ -195,6 +203,96 @@ Begin VB.Form frm_processoBaixaDiariaPorRota
          Top             =   360
          Width           =   4545
       End
+   End
+   Begin VB.Label lblTotalRecebivel 
+      Alignment       =   1  'Right Justify
+      BackColor       =   &H00FFFFFF&
+      Caption         =   "0,00"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H000040C0&
+      Height          =   255
+      Left            =   13140
+      TabIndex        =   18
+      Top             =   7680
+      Width           =   825
+   End
+   Begin VB.Label Label1 
+      Alignment       =   1  'Right Justify
+      BackColor       =   &H00FFFFFF&
+      Caption         =   "Total de recebíveis da Rota / Agente nesta data:"
+      Height          =   255
+      Left            =   8790
+      TabIndex        =   17
+      Top             =   7680
+      Width           =   4275
+   End
+   Begin VB.Label Label4 
+      Alignment       =   1  'Right Justify
+      BackColor       =   &H00FFFFFF&
+      Caption         =   "Total confirmado pelo Gerente:"
+      Height          =   255
+      Left            =   8790
+      TabIndex        =   15
+      Top             =   8280
+      Width           =   4275
+   End
+   Begin VB.Label Label3 
+      Alignment       =   1  'Right Justify
+      BackColor       =   &H00FFFFFF&
+      Caption         =   "Total informado pelo agente através do Crédito Fácil APP:"
+      Height          =   255
+      Left            =   8790
+      TabIndex        =   14
+      Top             =   7980
+      Width           =   4275
+   End
+   Begin VB.Label lblTotalConfirmado 
+      Alignment       =   1  'Right Justify
+      BackColor       =   &H00FFFFFF&
+      Caption         =   "0,00"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00800080&
+      Height          =   255
+      Left            =   13140
+      TabIndex        =   13
+      Top             =   8280
+      Width           =   825
+   End
+   Begin VB.Label lblTotalInformado 
+      Alignment       =   1  'Right Justify
+      BackColor       =   &H00FFFFFF&
+      Caption         =   "0,00"
+      BeginProperty Font 
+         Name            =   "MS Sans Serif"
+         Size            =   8.25
+         Charset         =   0
+         Weight          =   700
+         Underline       =   0   'False
+         Italic          =   0   'False
+         Strikethrough   =   0   'False
+      EndProperty
+      ForeColor       =   &H00008000&
+      Height          =   255
+      Left            =   13140
+      TabIndex        =   12
+      Top             =   7980
+      Width           =   825
    End
    Begin VB.Label lblRows 
       BeginProperty Font 
@@ -240,20 +338,72 @@ Attribute VB_Exposed = False
 Private oControle As New ControladorCreditoFacil
 Private oParcelas As New clsFinanciamentoParcela
 Private ocaixa    As New clsCaixa
-Const col_IdParcelamento As Integer = 1
+Const col_IdParcelamento  As Integer = 1
 Const col_IdFinanciamento As Integer = 2
-Const col_IdEmpresa As Integer = 3
-Const col_Empresa As Integer = 4
-Const col_NumParcela As Integer = 5
-Const col_ValorParcela As Integer = 6
-Const col_VencParcela As Integer = 7
-Const col_ValorRecebido As Integer = 8
-Const col_DataRecebido As Integer = 9
-Const col_DiasAtraso As Integer = 10
-Const col_SaldoDevedor As Integer = 11
-Const col_Situacao As Integer = 12
-Const col_botao As Integer = 13
+Const col_IdEmpresa       As Integer = 3
+Const col_Empresa         As Integer = 4
+Const col_NumParcela      As Integer = 5
+Const col_ValorParcela    As Integer = 6
+Const col_VencParcela     As Integer = 7
+Const col_ValorInformado  As Integer = 8
+Const col_ValorRecebido   As Integer = 9
+Const col_DataRecebido    As Integer = 10
+Const col_DiasAtraso      As Integer = 11
+Const col_SaldoDevedor    As Integer = 12
+Const col_Situacao        As Integer = 13
+Const col_botao           As Integer = 14
 
+
+Private Sub CalcularTotalInformado()
+
+    Dim i As Integer
+    Dim ValorInformado As Double
+    
+    vasCobranca.Col = col_ValorInformado
+    ValorRecebido = 0
+    
+    For i = 1 To vasCobranca.MaxRows
+        vasCobranca.Row = i
+        ValorInformado = ValorInformado + IIf(vasCobranca.TypeCheckText = "", 0, vasCobranca.TypeCheckText)
+    Next
+    
+    lblTotalInformado.Caption = Format(ValorInformado, "0.00")
+
+End Sub
+
+Private Sub CalcularTotalConfirmado()
+
+    Dim i As Integer
+    Dim ValorRecebido As Double
+    
+    vasCobranca.Col = col_ValorRecebido
+    ValorRecebido = 0
+    
+    For i = 1 To vasCobranca.MaxRows
+        vasCobranca.Row = i
+        ValorRecebido = ValorRecebido + IIf(vasCobranca.Text = "", 0, vasCobranca.Text)
+    Next
+        
+    lblTotalConfirmado.Caption = Format(ValorRecebido, "0.00")
+
+End Sub
+
+Private Sub CalcularTotalRecebivel()
+
+    Dim i As Integer
+    Dim ValorRecebivel As Double
+    
+    vasCobranca.Col = col_ValorParcela
+    ValorRecebido = 0
+    
+    For i = 1 To vasCobranca.MaxRows
+        vasCobranca.Row = i
+        ValorRecebivel = ValorRecebivel + IIf(vasCobranca.Text = "", 0, IIf(vasCobranca.Text > 0, vasCobranca.Text, 0))
+    Next
+        
+    lblTotalRecebivel.Caption = Format(ValorRecebivel, "0.00")
+
+End Sub
 
 Private Sub PopulaVencimento()
 
@@ -274,11 +424,43 @@ Dim rs As New ADODB.Recordset
 
 End Function
 
+Private Sub Check1_Click()
+
+    
+
+End Sub
+
+Private Sub chkConfirmarTodosValoresInformados_Click()
+
+    Dim i As Integer
+    vasCobranca.Col = col_ValorInformado
+    
+    If chkConfirmarTodosValoresInformados.value = 1 Then
+        For i = 1 To vasCobranca.MaxRows
+            vasCobranca.Row = i
+            vasCobranca.value = 1
+        Next
+    Else
+        For i = 1 To vasCobranca.MaxRows
+            vasCobranca.Row = i
+            vasCobranca.value = 0
+        Next
+    End If
+End Sub
+
+
 Private Sub cmdExibirRecebiveis_Click()
 
 Dim QtPagas As Integer
 
+   'Zera Totais
+   lblTotalRecebivel.Caption = "0,00"
+   lblTotalInformado.Caption = "0,00"
+   lblTotalConfirmado.Caption = "0,00"
+   
    PopulaParcelas
+   Call CalcularTotalInformado
+   Call CalcularTotalRecebivel
    'QtPagas = ContParcelasPagas
    'If QtPagas >= 1 Then
    '    HabilitaBotaoEstornar (QtPagas)
@@ -299,7 +481,7 @@ Dim strNomeCliente As String
 Dim idEmpresa As Long
 Dim blnPagar As Boolean
 
-If MsgBox("Confirma os lançamentos de pagamento de parcelas informados?", vbYesNo) = vbYes Then
+If MsgBox("Confirma os lançamentos de pagamento de parcelas recebidas?", vbYesNo) = vbYes Then
 
    Command1.Enabled = False
 
@@ -389,7 +571,7 @@ End If
 
 ocaixa.mTIMEOUT = gstrTimeOutGeral
 ocaixa.mSTRING_CONEXAO = gstrConexaoCreditoFacil
-txtSaldo = "R$ " & CStr(Format(ocaixa.getSaldo(txtID), "0.00"))
+txtSaldo = "R$ " & CStr(Format(ocaixa.getSaldo(IIf(IsNumeric(txtID), txtID, 0)), "0.00"))
 DTPickerVencimento.value = Mid(Now, 1, 10)
 
 End Sub
@@ -473,7 +655,7 @@ Private Sub PopulaParcelas()
         vasCobranca.Col = col_ValorParcela
         vasCobranca.Text = Format(rs("VALOR_COBRADO"), "0.00")
         If IsNull(rs("DATA_PAGAMENTO")) Then  'Se já foi pago fica azul, senão fica vermelha
-            vasCobranca.ForeColor = vbRed
+            vasCobranca.ForeColor = &H40C0&
         Else
             vasCobranca.ForeColor = vbBlue
         End If
@@ -481,8 +663,13 @@ Private Sub PopulaParcelas()
         vasCobranca.Col = col_VencParcela
         vasCobranca.Text = Format(rs("DATA_VENCIMENTO"), "dd/mm/yyyy")
         
+        vasCobranca.Col = col_ValorInformado
+        vasCobranca.TypeCheckText = IIf(IsNull(rs("VL_RECEBIDO_INFORMADO")), "0,00", Format(rs("VL_RECEBIDO_INFORMADO"), "0.00"))
+        vasCobranca.TypeButtonColor = vbGreen
+        
         vasCobranca.Col = col_ValorRecebido
         vasCobranca.Text = IIf(IsNull(rs("VALOR_RECEBIDO")), "", Format(rs("VALOR_RECEBIDO"), "0.00"))
+        
         If IsNull(rs("DATA_PAGAMENTO")) Then  'Se já foi pago fica azul, senão fica vermelha
             'vasCobranca.ForeColor = vbRed
         Else
@@ -570,20 +757,42 @@ Private Sub vasCobranca_ButtonClicked(ByVal Col As Long, ByVal Row As Long, ByVa
     Dim OriginalCol As Integer
     Dim ValorReceber As String
     Dim DataRecebimento As String
+    Dim ValorInformado As String
+    Dim ValorInformadoConfirmado As Boolean
     Dim ValorRecebido As String
-    Dim SaldoDevedor As Double
+    Dim SaldoDevedor As String
     
     OriginalCol = Col
     vasCobranca.Row = Row
     
     vasCobranca.Col = col_ValorParcela
     ValorReceber = vasCobranca.Text
+    
+    vasCobranca.Col = col_ValorInformado
+    ValorInformado = vasCobranca.TypeCheckText
+    ValorInformadoConfirmado = vasCobranca.value
+        
+    'Se valor informado for confirmado, sugerir valor recebido igual ao informado
+    If ValorInformadoConfirmado Then
+        vasCobranca.Col = col_ValorRecebido
+        vasCobranca.Text = ValorInformado
+    Else
+        vasCobranca.Col = col_ValorRecebido
+        vasCobranca.Text = ""
+    End If
+    
+    'Atualiza Total Informado]
+    Call CalcularTotalConfirmado
+    
     vasCobranca.Col = col_ValorRecebido
     ValorRecebido = vasCobranca.Text
+    
     vasCobranca.Col = col_DataRecebido
     DataRecebimento = vasCobranca.Text
+    
     vasCobranca.Col = col_SaldoDevedor
     SaldoDevedor = vasCobranca.Text
+    
     
     'vasCobranca.Col = col_Situacao
     'If vasCobranca.Text = "PAGO" Then Exit Sub
@@ -678,6 +887,7 @@ Private Sub vasCobranca_ButtonClicked(ByVal Col As Long, ByVal Row As Long, ByVa
     End If
     
 End Sub
+
 Private Function ExistePendenciaPagamentoAntesDestaParcela(ByVal Row As Long) As Boolean
 
 Dim i As Integer
@@ -694,11 +904,13 @@ Next
 End Function
 
 Private Sub vasCobranca_Change(ByVal Col As Long, ByVal Row As Long)
+    
     If Col = col_DataRecebido Then
         vasCobranca.Col = col_DiasAtraso
         vasCobranca.Text = calculaAtrasoPagamento(Row)
         Col = col_DataRecebido
     End If
+    
 End Sub
 
 Private Sub vasCobranca_Click(ByVal Col As Long, ByVal Row As Long)
@@ -772,3 +984,10 @@ color = vbGreen
    vasCobranca.Col = col_Situacao: vasCobranca.BackColor = color
    
 End Sub
+
+Private Sub vasCobranca_LeaveCell(ByVal Col As Long, ByVal Row As Long, ByVal NewCol As Long, ByVal NewRow As Long, Cancel As Boolean)
+
+    Call CalcularTotalConfirmado
+
+End Sub
+

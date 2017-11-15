@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.Form frm_crudUsuario 
    BackColor       =   &H00FFFFFF&
    Caption         =   "Cadastro: Usuários"
@@ -113,11 +113,21 @@ Begin VB.Form frm_crudUsuario
             Strikethrough   =   0   'False
          EndProperty
          Height          =   390
-         Left            =   210
+         Left            =   240
          MaxLength       =   30
          TabIndex        =   3
          Top             =   420
          Width           =   2085
+      End
+      Begin VB.Label lblCriticaLoginSenha 
+         BackColor       =   &H00FFFFFF&
+         Caption         =   "Login não pode ser igual ao de outro usuário, modifique o login e tente novamente."
+         ForeColor       =   &H000000FF&
+         Height          =   435
+         Left            =   2400
+         TabIndex        =   18
+         Top             =   420
+         Width           =   3735
       End
       Begin VB.Label lblConfirmacaoDa 
          BackColor       =   &H00C0C0C0&
@@ -331,15 +341,15 @@ Begin VB.Form frm_crudUsuario
    End
    Begin MSComctlLib.Toolbar ToolbarCadastroFuncao 
       Align           =   1  'Align Top
-      Height          =   660
+      Height          =   630
       Left            =   0
       TabIndex        =   0
       Top             =   0
       Width           =   6510
       _ExtentX        =   11483
-      _ExtentY        =   1164
-      ButtonWidth     =   1349
-      ButtonHeight    =   1005
+      _ExtentY        =   1111
+      ButtonWidth     =   1191
+      ButtonHeight    =   953
       Appearance      =   1
       ImageList       =   "ImageList1"
       _Version        =   393216
@@ -423,13 +433,22 @@ Private Sub cmdSelecionarEntidade_Click()
     
         oFuncionario.m_timeOut = gstrTimeOutGeral
         oFuncionario.m_stringConexao = gstrConexaoCreditoFacil
-        Set frmPesquisa.rsResultset = oFuncionario.RecuperarFuncionarios()
-    
+        If mstrTipoOperacao = "I" Then
+            Set frmPesquisa.rsResultset = oFuncionario.RecuperarFuncionariosSemLogin()
+        Else
+            Set frmPesquisa.rsResultset = oFuncionario.RecuperarFuncionariosComLogin()
+        End If
         'Campo chave
         frmPesquisa.FieldsKey = "ID_FUNCIONARIO"
         'Campo a ser listado no resultado da pesquisa
         frmPesquisa.FieldsList = "NOME"
-        frmPesquisa.Caption = frmPesquisa.Caption & "Selecione um Funcionário Cadastrado"
+        
+        If mstrTipoOperacao = "I" Then
+            frmPesquisa.Caption = frmPesquisa.Caption & " Selecione um Funcionário para criar login"
+        Else
+            frmPesquisa.Caption = frmPesquisa.Caption & " Selecione um funcionário para editar login"
+        End If
+        
         frmPesquisa.Show 1
         'Recebe retorno da pesquisa
         txtCodigoEntidade = frmPesquisa.FieldsReturn
@@ -445,6 +464,8 @@ Private Sub Form_Load()
 oUsuario.m_timeOut = gstrTimeOutGeral
 oUsuario.m_stringConexao = gstrConexaoCreditoFacil
 mstrTipoOperacao = ""
+stbmsg.SimpleText = "Alterar"
+lblCriticaLoginSenha.Caption = ""
 
 ToolbarCadastroFuncao.Buttons("Salvar").Enabled = False
 ToolbarCadastroFuncao.Buttons("Excluir").Enabled = False
@@ -475,6 +496,8 @@ End Sub
 Private Sub Salvar_Click()
 
 'Validações
+Dim blnSenhaValida As Boolean
+
 If txtCodigoEntidade.Text = "" Or txtCodigoEntidade.Text = "0" Then Exit Sub
 
 If Not ValidarInsert Then
@@ -490,6 +513,11 @@ MoveTelaParaObjetoCab mstrTipoOperacao
 
 If txtID.Text = 0 Then Exit Sub
 
+Dim conexao As New ADODB.Connection
+conexao.Open gstrConexaoCreditoFacil
+conexao.Execute ("update USUARIO SET PASSWORD = ENCRYPTBYPASSPHRASE(N'credito-facil-erp-security-" & txtLogin.Text & "', N'" & txtSenha.Text & "') WHERE LOGIN = '" & txtLogin.Text & "'")
+Set conexao = Nothing
+
 If mstrTipoOperacao = "I" Then
     MsgBox "Registro incluido com sucesso!", vbInformation, "SUCESSO"
 ElseIf mstrTipoOperacao = "A" Then
@@ -503,10 +531,10 @@ ToolbarCadastroFuncao.Buttons("Salvar").Enabled = False
 End Sub
 Private Sub Novo_Click()
 
+mstrTipoOperacao = "I"
 txtLogin.SetFocus
 cmdSelecionarEntidade_Click
 ToolbarCadastroFuncao.Buttons("Salvar").Enabled = True
-mstrTipoOperacao = "I"
 stbmsg.SimpleText = "Incluindo"
 DoEvents
 'txtCodigoEntidade = ""
@@ -516,12 +544,13 @@ End Sub
 Private Sub Excluir_Click()
 
 If txtCodigoEntidade = "" Or txtCodigoEntidade = "0" Then Exit Sub
-If MsgBox("Deseja realmente excluir o registro?", vbYesNo, "Pergunta") = vbNo Then Exit Sub
+If MsgBox("Ao excluir o login, este usuário não poderá acessar o sistema, confirma?", vbYesNo, "Pergunta") = vbNo Then Exit Sub
 mstrTipoOperacao = "E"
 MoveTelaParaObjetoCab mstrTipoOperacao
 MsgBox "Registro excluido com sucesso!", vbInformation, "SUCESSO"
 Call Limpacampos
 txtCodigoEntidade = ""
+mstrTipoOperacao = ""
 
 End Sub
 Private Sub Fechar_Click()
@@ -679,9 +708,79 @@ Private Sub MoveObjetoParaTelaCab(ByRef rs As ADODB.Recordset)
         chkAtivo.value = 0
     End If
     
+End Sub
+
+Private Sub txtLogin_Change()
+
+    txtLogin = Replace(txtLogin, " ", "")
+    txtLogin.SelStart = Len(txtLogin.Text)
+    lblCriticaLoginSenha = ""
+    ToolbarCadastroFuncao.Buttons(2).Enabled = True
     
 End Sub
 
+Private Sub txtLogin_LostFocus()
+    
+    Dim rsLogin As New ADODB.Recordset
+    Set rsLogin = oUsuario.ConsultaLogin(txtLogin.Text)
+    
+    If Not rsLogin.EOF Then
+        lblCriticaLoginSenha.Caption = "Login não pode ser igual ao de outro usuário, modifique o login e tente novamente."
+        txtLogin.SetFocus
+        ToolbarCadastroFuncao.Buttons(2).Enabled = False
+        
+    Else
+        lblCriticaLoginSenha.Caption = ""
+        ToolbarCadastroFuncao.Buttons(2).Enabled = True
+    End If
+    
+    Set rsLogin = Nothing
+
+End Sub
+
 Private Sub txtSenha_Change()
-txtConfirmacaoSenha = ""
+    
+    txtConfirmacaoSenha.Text = ""
+    lblCriticaLoginSenha.Caption = ""
+    ToolbarCadastroFuncao.Buttons(2).Enabled = True
+    
+End Sub
+
+Private Function ValidarSenha() As Boolean
+
+    DoEvents
+    If Len(txtSenha.Text) = 0 Then Exit Function
+    
+    If txtSenha.Text = "abcd1234" Or _
+       txtSenha.Text = "123456" Or _
+       Len(txtSenha.Text) < 6 Then
+       lblCriticaLoginSenha = "Senha fácil demais, tente outra. Mínimo 6 dígitos."
+       ValidarSenha = False
+    Else
+        
+        If Not oUsuario.SenhaUnica(CriptSenha(txtSenha.Text)) Then
+            ValidarSenha = False
+            lblCriticaLoginSenha = "Outro usuário já usa a mesma senha, tente outra."
+        Else
+            lblCriticaLoginSenha = ""
+            ValidarSenha = True
+        End If
+
+    End If
+    DoEvents
+    
+End Function
+
+Private Sub txtSenha_LostFocus()
+    
+    If Len(txtSenha.Text) = 0 Then Exit Sub
+    
+    If Not ValidarSenha Then
+        txtSenha.SetFocus
+        ToolbarCadastroFuncao.Buttons(2).Enabled = False
+    Else
+        lblCriticaLoginSenha.Caption = ""
+        ToolbarCadastroFuncao.Buttons(2).Enabled = True
+    End If
+    
 End Sub

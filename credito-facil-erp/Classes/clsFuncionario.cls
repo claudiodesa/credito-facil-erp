@@ -241,7 +241,7 @@ trataerro:
   Set cnConexao = Nothing
   Err.Raise vbObjectError + 1, Err.Source, Err.Description
 End Function
-Public Function Consulta(ByVal idFuncionario As Long) As ADODB.Recordset
+Public Function consulta(ByVal idFuncionario As Long) As ADODB.Recordset
 
 Dim mCn       As ADODB.Connection
 Dim mRs       As ADODB.Recordset
@@ -259,7 +259,57 @@ Dim mRs       As ADODB.Recordset
 
     Set mRs = CtxCreateRecordSet(mCn, ssql)
     Set mRs.ActiveConnection = Nothing
-    Set Consulta = mRs
+    Set consulta = mRs
+  
+    Set mCn = Nothing
+
+Exit Function
+trataerro:
+  Err.Raise vbObjectError + 1, Err.Source, Err.Description
+End Function
+Public Function RecuperarFuncionariosComLogin() As ADODB.Recordset
+
+Dim mCn       As ADODB.Connection
+Dim mRs       As ADODB.Recordset
+
+    On Error GoTo trataerro
+  
+    Set mCn = CreateObject("ADODB.Connection")
+    mCn.CommandTimeout = m_timeOut
+    mCn.ConnectionString = m_stringConexao
+    mCn.Open
+    
+    ssql = ""
+    ssql = "SELECT F.* FROM FUNCIONARIO F WITH (NOLOCK) JOIN USUARIO U WITH (NOLOCK) ON F.ID_FUNCIONARIO = U.ID_FUNCIONARIO"
+
+    Set mRs = CtxCreateRecordSet(mCn, ssql)
+    Set mRs.ActiveConnection = Nothing
+    Set RecuperarFuncionariosComLogin = mRs
+  
+    Set mCn = Nothing
+
+Exit Function
+trataerro:
+  Err.Raise vbObjectError + 1, Err.Source, Err.Description
+End Function
+Public Function RecuperarFuncionariosSemLogin() As ADODB.Recordset
+
+Dim mCn       As ADODB.Connection
+Dim mRs       As ADODB.Recordset
+
+    On Error GoTo trataerro
+  
+    Set mCn = CreateObject("ADODB.Connection")
+    mCn.CommandTimeout = m_timeOut
+    mCn.ConnectionString = m_stringConexao
+    mCn.Open
+    
+    ssql = ""
+    ssql = "SELECT F.* FROM FUNCIONARIO F WITH (NOLOCK) LEFT JOIN USUARIO U WITH (NOLOCK) ON F.ID_FUNCIONARIO = U.ID_FUNCIONARIO WHERE U.ID_FUNCIONARIO IS NULL"
+
+    Set mRs = CtxCreateRecordSet(mCn, ssql)
+    Set mRs.ActiveConnection = Nothing
+    Set RecuperarFuncionariosSemLogin = mRs
   
     Set mCn = Nothing
 
@@ -280,7 +330,7 @@ Dim mRs       As ADODB.Recordset
     mCn.Open
     
     ssql = ""
-    ssql = "SELECT * FROM FUNCIONARIO WITH (NOLOCK) "
+    ssql = "SELECT F.* FROM FUNCIONARIO F WITH (NOLOCK)"
 
     Set mRs = CtxCreateRecordSet(mCn, ssql)
     Set mRs.ActiveConnection = Nothing
@@ -292,6 +342,7 @@ Exit Function
 trataerro:
   Err.Raise vbObjectError + 1, Err.Source, Err.Description
 End Function
+
 Public Function RecuperarNomeFuncionario(ByVal idFuncionario As Long) As String
 
 Dim mCn       As ADODB.Connection

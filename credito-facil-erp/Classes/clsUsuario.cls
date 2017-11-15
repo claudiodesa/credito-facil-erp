@@ -282,3 +282,34 @@ trataerro:
   Err.Raise vbObjectError + 1, Err.Source, Err.Description
 End Function
 
+Public Function SenhaUnica(ByVal strSenha As String) As Boolean
+
+Dim mCn       As ADODB.Connection
+Dim mRs       As ADODB.Recordset
+
+    On Error GoTo trataerro
+  
+    Set mCn = CreateObject("ADODB.Connection")
+    mCn.CommandTimeout = m_timeOut
+    mCn.ConnectionString = m_stringConexao
+    mCn.Open
+    
+    ssql = ""
+    ssql = ssql & " SELECT * FROM usuario WITH (NOLOCK) " & vbCrLf
+    ssql = ssql & " WHERE SENHA = '" & strSenha & "'    " & vbCrLf
+
+    Set mRs = CtxCreateRecordSet(mCn, ssql)
+    Set mRs.ActiveConnection = Nothing
+    If mRs.EOF Then
+        SenhaUnica = True
+    Else
+        SenhaUnica = False
+    End If
+  
+    Set mCn = Nothing
+
+Exit Function
+trataerro:
+  Err.Raise vbObjectError + 1, Err.Source, Err.Description
+End Function
+

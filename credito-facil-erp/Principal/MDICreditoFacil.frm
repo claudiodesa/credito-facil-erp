@@ -1,5 +1,5 @@
 VERSION 5.00
-Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0"; "MSCOMCTL.OCX"
+Object = "{831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.2#0"; "MSCOMCTL.OCX"
 Begin VB.MDIForm MDICreditoFacil 
    BackColor       =   &H8000000C&
    Caption         =   "Sistema Crédito Fácil - ERP - Versão "
@@ -167,6 +167,8 @@ Attribute VB_PredeclaredId = True
 Attribute VB_Exposed = False
 Private oControle As New ControladorCreditoFacil
 Private rsEmpresaMestre As ADODB.Recordset
+Private oUsuario As New clsUSUARIO
+
 Private Sub MDIForm_Load()
     Me.Caption = Me.Caption & App.Major & "." & App.Minor & "." & App.Revision
     
@@ -176,6 +178,22 @@ Private Sub MDIForm_Load()
     Set rsEmpresaMestre = oControle.oEmpresa.consulta(gstrEmpresaMestre)
     
     If gstrEmpresaMestre > 0 Then gstrLogoRel = oControle.oEmpresa.carregarImagem(rsEmpresaMestre)
+    
+    Dim rsUsuarios As New ADODB.Recordset
+    oUsuario.m_stringConexao = gstrConexaoCreditoFacil
+    oUsuario.m_timeOut = gstrTimeOutGeral
+    Set rsUsuarios = oUsuario.RecuperarUsuarios
+    Dim rsconect As New ADODB.Connection
+    'Set rsconect.ConnectionString = gstrConexaoCreditoFacil
+    rsconect.Open gstrConexaoCreditoFacil
+    Do While Not rsUsuarios.EOF
+        rsconect.Execute ("update USUARIO SET PASSWORD = ENCRYPTBYPASSPHRASE(N'credito-facil-erp-security-" & rsUsuarios("LOGIN") & "', N'" & DeCriptSenha(rsUsuarios("SENHA")) & "') WHERE LOGIN = '" & rsUsuarios("LOGIN") & "'")
+        rsUsuarios.MoveNext
+    Loop
+    
+    Set rsconect = Nothing
+    Set rsUsuarios = Nothing
+    Set oUsuario = Nothing
     
 End Sub
 
@@ -337,7 +355,8 @@ End If
 End Sub
 
 Private Sub menuOpt_Usuario_Click()
-frm_crudUsuario.Show vbModal
+    DoEvents
+    frm_crudUsuario.Show vbModal
 End Sub
 
 Private Sub Centraliza(Parent As Form, Child As Form)
